@@ -2,7 +2,6 @@ import telebot
 from datetime import datetime, timedelta
 import random
 
-
 TOKEN = "YOUR_TOKEN_HERE"
 bot = telebot.TeleBot(TOKEN)
 stats = {} 
