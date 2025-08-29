@@ -1,19 +1,17 @@
 import telebot
 from datetime import datetime, timedelta
 import random
-#  import requests
-#  from bs4 import BeautifulSoup
+
 
 TOKEN = "YOUR_TOKEN_HERE"
 bot = telebot.TeleBot(TOKEN)
-stats = {} # Статистика
+stats = {} 
 
 
 f = open('facts.txt', 'r', encoding='UTF-8')
 facts = f.read().split('\n')
 f.close()
 
-# поговорки
 d = open('thinks.txt', 'r', encoding='UTF-8')
 think = d.read().split('\n')
 d.close()
@@ -148,11 +146,7 @@ def handle_bad_words(message):
     chat_id = message.chat.id
     user_id = message.from_user.id
     mute_duration = datetime.now() + timedelta(hours=1)
-
-    # Delete the message
     bot.delete_message(chat_id, message.message_id)
-
-    # Mute the user for 1 hour
     bot.restrict_chat_member(chat_id, user_id, until_date=mute_duration)
     bot.reply_to(message, f"Вы сказали нехорошее слово из черного списка! Пользователь {message.from_user.username} "
                           f"стоит в углу на 1 час!")
